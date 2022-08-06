@@ -22,7 +22,7 @@ async function getMovies(req, res) {
 async function getUserMovies(req, res) {
     try {
         let dataBaseMovies = await Movie.findAll();
-        // res.send(dataBaseMovies);
+        res.send(dataBaseMovies);
     } catch (error) {
         res.send(error)
     }
