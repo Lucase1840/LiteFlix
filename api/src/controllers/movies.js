@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { API_KEY } = process.env;
-const { Movies } = require("../db.js");
-// const { Op } = require("sequelize");
+const { Movie } = require("../db.js");
+const { Op } = require("sequelize");
 
 async function getMovies(req, res) {
     console.log("Hola, vengo a traer movies")
@@ -21,14 +21,38 @@ async function getMovies(req, res) {
 
 async function getUserMovies(req, res) {
     try {
-        let dataBaseMovies = await Movies.findAll();
+        let dataBaseMovies = await Movie.findAll();
         // res.send(dataBaseMovies);
     } catch (error) {
         res.send(error)
     }
 };
 
+async function uploadMovie(req, res) {
+    let { title, image } = req.body;
+    const checkIfMovieIsAlreadyOnDb = await Movie.findOne({
+        where: {
+            title: { [Op.iLike]: `%${title}%` },
+        }
+    });
+    if (!checkIfMovieIsAlreadyOnDb) {
+        try {
+            await Movie.create({
+                title,
+                image,
+            })
+            let dataBaseMovies = await Movie.findAll();
+            res.status(201).send(dataBaseMovies);
+        } catch (error) {
+            res.send(error)
+        }
+    } else {
+        res.status(422).send('Error de creacion. La pelicula ya existe');
+    }
+};
+
 module.exports = {
     getMovies,
-    getUserMovies
+    getUserMovies,
+    uploadMovie
 };
