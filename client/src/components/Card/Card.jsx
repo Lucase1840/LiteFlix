@@ -7,8 +7,6 @@ import { ReactComponent as PlayButton } from "../../images/playbutton.svg"
 import { ReactComponent as Star } from "../../images/star.svg"
 import { ReactComponent as PlayButtonLittle } from "../../images/playbuttonlittle.svg"
 
-import { initializeConnect } from 'react-redux/es/components/connect';
-
 export default function Card({ title, votes, year, image }) {
     console.log(`https://image.tmdb.org/t/p/w300${image}`)
 
@@ -36,16 +34,9 @@ export default function Card({ title, votes, year, image }) {
                     maxWidth: 220,
                     minHeight: 146,
                     color: "white",
-                    mb: 1,
+                    mb: "20px",
                     position: "relative",
                     borderRadius: 1
-
-
-
-                }, {
-                    //     "&:hover": {
-                    //         backgroundColor: "red"
-                    //     }
                 }
                 ]}
                     onMouseOver={handleMouseOver}
@@ -125,13 +116,10 @@ export default function Card({ title, votes, year, image }) {
                         maxWidth: 220,
                         minHeight: 146,
                         color: "white",
-                        mb: 1,
                         position: "relative",
-                        borderRadius: 1
+                        borderRadius: 1,
+                        mb: "20px"
                     }, {
-                        //     "&:hover": {
-                        //         backgroundColor: "red"
-                        //     }
                     }
                     ]}
                         onMouseOver={handleMouseOver}
@@ -143,13 +131,6 @@ export default function Card({ title, votes, year, image }) {
                             height: 146,
                             background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 22.78%, #000000 122.69%)",
                             borderRadius: 1
-                            // {
-                            //     "&:hover": {
-                            //         width: 220,
-                            //         height: 146,
-                            //         backgroundColor: "rgba(36, 36, 36, 0.7)",
-                            //         position: "absolute",
-                            //     }
                         }}>
                         </Box>
                         <Box sx={{
@@ -181,7 +162,6 @@ export default function Card({ title, votes, year, image }) {
 
                             <Box sx={{ display: "none", justifyContent: "space-around" }}>
                                 <Typography variant="body2">
-
                                     {votes}
                                 </Typography>
                                 <Typography variant="body2">
