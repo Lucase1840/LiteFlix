@@ -28,3 +28,12 @@ export const moviesSelected = (selectedOption) => {
     dispatch({ type: MOVIES_SELECTED, payload: selectedOption })
   }
 };
+
+// export const uploadMovie = (data) => {
+//   return function (dispatch) {
+//     return axios.post(`${URL}/movies/upload`, data)
+//       .then(resp => console.log(resp.data))
+//       // .then(resp => dispatch({ type: GET_USER_MOVIES, payload: resp.data }))
+//       .catch(error => console.log('Action error in getUserMovies: ', error))
+//   }
+// };

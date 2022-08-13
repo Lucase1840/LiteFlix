@@ -30,6 +30,7 @@ async function getUserMovies(req, res) {
 
 async function uploadMovie(req, res) {
     let { title, image } = req.body;
+    console.log(title, image)
     const checkIfMovieIsAlreadyOnDb = await Movie.findOne({
         where: {
             title: { [Op.iLike]: `%${title}%` },

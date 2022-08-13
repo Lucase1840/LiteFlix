@@ -7,6 +7,7 @@ import Cards from '../Cards/Cards.jsx'
 import MainTitleAndButtons from '../MainTitleAndButtons/MainTitleAndButtons.jsx'
 import NavBar from '../NavBar/NavBar.jsx'
 import Filter from '../Filter/Filter.jsx'
+import AddMovieModal from '../AddMovieModal/AddMovieModal.jsx'
 function Home() {
   const dispatch = useDispatch();
   const highlightedMovie = useSelector(state => state.highlightedMovie[0])
@@ -20,6 +21,7 @@ function Home() {
 
   return (
     <Box sx={{ maxWidth: "100vw", mx: "-8px", my: "-8px", boxSizing: "border-box", }}>
+      <AddMovieModal />
       <Box sx={{
         minHeight: "100vh",
         backgroundColor: "red",

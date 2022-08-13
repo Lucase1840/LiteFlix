@@ -22,7 +22,6 @@ export default function Card({ title, votes, year, image }) {
 
     !image.includes("https:") ? imageUrl = `https://image.tmdb.org/t/p/w780${image}` : imageUrl = image
 
-    console.log(isHovering)
     return (
         <>
             {isHovering ?
