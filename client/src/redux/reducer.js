@@ -1,14 +1,16 @@
 import {
   GET_MOVIES,
   GET_USER_MOVIES,
-  MOVIES_SELECTED
+  MOVIES_SELECTED,
+  UPLOAD_MOVIE
 } from "./actions"
 
 const initialState = {
   popularMovies: [],
   userMovies: [],
   highlightedMovie: [],
-  moviesSelected: []
+  moviesSelected: [],
+  error: ""
 }
 
 export function rootReducer(state = initialState, { type, payload }) {
@@ -38,6 +40,18 @@ export function rootReducer(state = initialState, { type, payload }) {
           ...state,
           moviesSelected: state.userMovies
         }
+      }
+
+    case UPLOAD_MOVIE:
+      if (payload?.error) {
+        return {
+          ...state,
+          error: payload
+        }
+      }
+      return {
+        ...state,
+        userMovies: payload
       }
 
     default: return state;

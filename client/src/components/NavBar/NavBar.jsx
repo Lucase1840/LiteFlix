@@ -6,7 +6,7 @@ import { ReactComponent as ProfileIcon } from "../../images/profileicon.svg"
 import Box from '@mui/material/Box';
 import React from 'react';
 
-export default function NavBar() {
+export default function NavBar({ handleOpen }) {
 
     return (
         <Box sx={{ display: "flex", minHeight: "50px", justifyContent: "space-between", }} >
@@ -35,14 +35,15 @@ export default function NavBar() {
                     flix
                 </Typography>
 
-                <Typography variant="h1" component="div" sx={{
+                <Typography onClick={handleOpen} variant="h1" component="div" sx={{
                     fontFamily: "BebasNeue-Regular",
                     fontStyle: "normal",
                     fontWeight: 700,
                     fontSize: "18px",
                     lineHeight: "18 px",
                     letterSpacing: "4px",
-                    color: "white"
+                    color: "white",
+                    cursor: "pointer"
                 }}>
                     <AddIcon></AddIcon>
                     {`\xa0agregar pelicula`}
