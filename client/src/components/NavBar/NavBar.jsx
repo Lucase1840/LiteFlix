@@ -50,7 +50,7 @@ export default function NavBar({ handleOpen }) {
                 </Typography>
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", minWidth: "175px", justifyContent: "space-around" }}>
+            <Box sx={{ display: "flex", alignItems: "center", minWidth: { xs: "30px", lg: "175px" }, justifyContent: "space-around" }}>
                 <MenuIcon></MenuIcon>
                 <NotificationIcon></NotificationIcon>
                 <ProfileIcon></ProfileIcon>

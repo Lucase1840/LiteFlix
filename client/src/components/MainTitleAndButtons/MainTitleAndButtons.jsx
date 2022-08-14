@@ -7,15 +7,15 @@ import { ReactComponent as PlayIcon } from "../../images/playicon.svg"
 export default function MainTitleAndButtons({ movieTitle }) {
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", }} >
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", }}>
-                <Box sx={{ display: "flex", mb: "24px" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", maxWidth: { xs: "312px", lg: "100%" }, }} >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: { xs: "center", lg: "flex-start" }, maxWidth: { xs: "312px", lg: "100%" }, mt: { xs: 10 } }}>
+                <Box sx={{ display: "flex", mb: { lg: "24px" } }}>
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",
                         fontWeight: 400,
                         fontSize: "20px",
-                        lineHeight: "20px",
+                        lineHeight: { xs: "20px", lg: "24px" },
                         letterSpacing: "4px",
                         color: "white"
                     }}>
@@ -24,7 +24,7 @@ export default function MainTitleAndButtons({ movieTitle }) {
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",
-                        fontWeight: 700,
+                        fontWeight: { xs: 400, lg: 700 },
                         fontSize: "20px",
                         lineHeight: "20px",
                         letterSpacing: "4px",
@@ -34,17 +34,17 @@ export default function MainTitleAndButtons({ movieTitle }) {
                     </Typography>
                 </Box>
                 <Typography variant="h1" component="div" sx={{
-                    minWidth: "950px",
-                    maxWidth: "950px",
+                    minWidth: { xs: "312px", lg: "950px" },
+                    maxWidth: { xs: "312px", lg: "950px" },
                     maxHeight: "400px",
                     fontFamily: "BebasNeue-Regular",
                     fontStyle: "normal",
                     fontWeight: 700,
-                    fontSize: "120px",
-                    lineHeight: "100px",
-                    letterSpacing: "16px",
+                    fontSize: { xs: "76px", lg: "120px" },
+                    lineHeight: { xs: "78px", lg: "100px" },
+                    letterSpacing: { xs: "10px", lg: "16px" },
                     color: "#64EEBC",
-                    textAlign: "left",
+                    textAlign: { xs: "center", lg: "left" },
                     mb: "32px",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
