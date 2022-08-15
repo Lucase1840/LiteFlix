@@ -8,8 +8,6 @@ import { ReactComponent as Star } from "../../images/star.svg"
 import { ReactComponent as PlayButtonLittle } from "../../images/playbuttonlittle.svg"
 
 export default function Card({ title, votes, year, image }) {
-    console.log(`https://image.tmdb.org/t/p/w300${image}`)
-
     const [isHovering, setIsHovering] = useState(false);
 
     const handleMouseOver = () => {
@@ -20,23 +18,33 @@ export default function Card({ title, votes, year, image }) {
         setIsHovering(false);
     };
 
+    let imageUrl;
+
+    !image.includes("https:") ? imageUrl = `https://image.tmdb.org/t/p/w780${image}` : imageUrl = image
+
     console.log(isHovering)
     return (
         <>
             {isHovering ?
                 (<CardContent sx={[{
-                    backgroundImage: `url(https://image.tmdb.org/t/p/w780${image})`,
+                    backgroundImage: `url(${imageUrl})`,
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     p: 0,
                     pb: "0px !important",
                     maxWidth: 220,
+                    minWidth: 220,
                     minHeight: 146,
+                    maxHeight: 146,
                     color: "white",
-                    mb: "20px",
                     position: "relative",
-                    borderRadius: 1
+                    borderRadius: 1,
+                    mb: "20px",
+                    cursor: "pointer",
+                    "&:last-child": {
+                        mb: "0"
+                    }
                 }
                 ]}
                     onMouseOver={handleMouseOver}
@@ -79,15 +87,18 @@ export default function Card({ title, votes, year, image }) {
                             </Typography>
                         </Box>
 
-                        <Box sx={{ display: "flex", justifyContent: "space-around", position: "relative", minWidth: "90%", mb: 2, mt: 2 }}>
+                        <Box sx={{ display: "flex", justifyContent: "space-around", position: "relative", mb: 2, mt: 2 }}>
                             <Typography variant="body2" sx={{
+                                width: "60px",
                                 mr: 12,
+                                ml: 0.5,
                                 fontFamily: "BebasNeue-Regular",
                                 fontStyle: "normal",
                                 fontWeight: 400,
                                 fontSize: "14px",
                                 lineHeight: "14px",
-                                letterSpacing: "4px"
+                                letterSpacing: "4px",
+                                textAlign: "left"
                             }}>
                                 <Star />
                                 {` ${votes}`}
@@ -107,18 +118,23 @@ export default function Card({ title, votes, year, image }) {
                 </CardContent >) :
                 (
                     <CardContent sx={[{
-                        backgroundImage: `url(https://image.tmdb.org/t/p/w780${image})`,
+                        backgroundImage: `url(${imageUrl})`,
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
                         p: 0,
                         pb: "0px !important",
                         maxWidth: 220,
+                        minWidth: 220,
+                        maxHeight: 146,
                         minHeight: 146,
                         color: "white",
                         position: "relative",
                         borderRadius: 1,
-                        mb: "20px"
+                        mb: "20px",
+                        "&:last-child": {
+                            mb: "0"
+                        }
                     }, {
                     }
                     ]}
@@ -157,15 +173,6 @@ export default function Card({ title, votes, year, image }) {
                                     mb: 2,
                                 }}>
                                     {title}
-                                </Typography>
-                            </Box>
-
-                            <Box sx={{ display: "none", justifyContent: "space-around" }}>
-                                <Typography variant="body2">
-                                    {votes}
-                                </Typography>
-                                <Typography variant="body2">
-                                    {year}
                                 </Typography>
                             </Box>
                         </Box>

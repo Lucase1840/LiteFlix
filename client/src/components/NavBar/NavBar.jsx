@@ -9,7 +9,7 @@ import React from 'react';
 export default function NavBar() {
 
     return (
-        <Box sx={{ display: "flex", minHeight: "65px", justifyContent: "space-between" }} >
+        <Box sx={{ display: "flex", minHeight: "50px", justifyContent: "space-between", }} >
             <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Typography variant="h1" component="div" sx={{
                     fontFamily: "BebasNeue-Regular",
@@ -25,7 +25,7 @@ export default function NavBar() {
                 <Typography variant="h1" component="div" sx={{
                     fontFamily: "BebasNeue-Regular",
                     fontStyle: "normal",
-                    fontWeight: 400,
+                    fontWeight: 200,
                     fontSize: "34px",
                     lineHeight: "34px",
                     letterSpacing: "4px",
