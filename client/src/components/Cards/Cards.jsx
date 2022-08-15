@@ -8,7 +8,7 @@ function Home() {
     const popularMovies = useSelector(state => state.popularMovies)
 
     useEffect(() => {
-        dispatch(getMovies())
+        // dispatch(getMovies())
     }, [dispatch]);
 
     console.log(popularMovies)
