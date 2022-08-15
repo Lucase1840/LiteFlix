@@ -14,7 +14,6 @@ async function getMovies(req, res) {
             highlightedMovie: [highlightedMovie.data.results[0]],
             popularMovies: popularMovies
         };
-        console.log(highlightedMovie)
         res.send(response);
     } catch (error) {
         res.send(error);
