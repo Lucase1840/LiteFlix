@@ -1,17 +1,30 @@
 import React from 'react';
+
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
+function SuccesfullUpload({ title, exitModal, uploadFinished }) {
 
-function SuccesfullUpload({ title, exitModal }) {
+    const isMobileScreen = useMediaQuery('(max-width:375px)');
 
     const handleClick = () => {
-        exitModal(false)
-    }
+        uploadFinished(false);
+        exitModal(false);
+    };
+
     return (
-        <>
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: 700, justifyContent: "center" }}>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: 700,
+            justifyContent: "center", mb: { xs: 20, lg: 0 }
+        }}>
+            {isMobileScreen ?
+                ''
+                :
                 <Box sx={{ display: "flex", alignItems: "center", }}>
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
@@ -36,14 +49,16 @@ function SuccesfullUpload({ title, exitModal }) {
                         flix
                     </Typography>
                 </Box>
-                <Box sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    minHeight: 180,
-                    mt: 12
-                }}>
+            }
+            <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-around",
+                alignItems: "center",
+                minHeight: { xs: 300, lg: 180 },
+                mt: 12
+            }}>
+                <Box sx={{ maxWidth: { xs: "300px", lg: "500px" } }}>
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",
@@ -64,35 +79,35 @@ function SuccesfullUpload({ title, exitModal }) {
                         lineHeight: "24px",
                         letterSpacing: "4px",
                         color: "white",
-                        mb: 11
+                        mb: 11,
                     }}>
-                        {`${title} fue correctamente subida`}
+                        {`${title} fue correctamente subida.`}
                     </Typography>
-                    <Button type="submit" variant="contained" onClick={handleClick}
-                        sx={[{
-                            width: "248px",
-                            height: "56px",
-                            fontFamily: "BebasNeue-Regular",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            fontSize: "18px",
-                            lineHeight: "22px",
-                            letterSpacing: "4px",
+                </Box>
+                <Button type="submit" variant="contained" onClick={handleClick}
+                    sx={[{
+                        width: "248px",
+                        height: "56px",
+                        fontFamily: "BebasNeue-Regular",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        fontSize: "18px",
+                        lineHeight: "22px",
+                        letterSpacing: "4px",
+                        backgroundColor: "#FFFFFF",
+                        borderRadius: "0px",
+                        boxShadow: 0,
+                        color: "black"
+                    }, {
+                        ":hover": {
                             backgroundColor: "#FFFFFF",
-                            borderRadius: "0px",
                             boxShadow: 0,
                             color: "black"
-                        }, {
-                            ":hover": {
-                                backgroundColor: "#FFFFFF",
-                                boxShadow: 0,
-                                color: "black"
-                            }
-                        }]} >ir al home</Button>
-                </Box>
+                        }
+                    }]} >ir al home</Button>
             </Box>
-        </>
+        </Box>
     )
-}
+};
 
 export default SuccesfullUpload
