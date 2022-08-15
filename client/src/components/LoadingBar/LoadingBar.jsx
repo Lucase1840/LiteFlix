@@ -8,7 +8,7 @@ function LinearProgressWithLabel(props) {
     if (props.value === "error") {
         let value = 100
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: "flex-start", minHeight: "100px", width: "600px", }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: "flex-start", minHeight: "100px", width: { xs: "340px", lg: "600px" }, ml: { xs: 1, lg: 0 } }}>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary" sx={{
                         fontFamily: "BebasNeue-Regular",
@@ -24,7 +24,7 @@ function LinearProgressWithLabel(props) {
                     </Typography>
                 </Box>
                 <Box sx={{
-                    width: '100%',
+                    width: { xs: "340px", lg: "600px" },
                     mr: 1, position: "relative",
                     height: "10px"
                 }}>
@@ -54,7 +54,7 @@ function LinearProgressWithLabel(props) {
         );
     } else {
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: "flex-start", minHeight: "100px", width: "600px", }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: "flex-start", minHeight: "100px", width: { xs: "340px", lg: "600px" }, ml: { xs: 1, lg: 0 } }}>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary" sx={{
                         fontFamily: "BebasNeue-Regular",
@@ -73,7 +73,7 @@ function LinearProgressWithLabel(props) {
                     </Typography>
                 </Box>
                 <Box sx={{
-                    width: '100%',
+                    width: { xs: "340px", lg: "600px" },
                     mr: 1, position: "relative",
                     height: "10px"
                 }}>

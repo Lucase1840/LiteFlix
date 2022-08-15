@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { ReactComponent as Clip } from "../../images/clip.svg"
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const baseStyle = {
-    width: "600px",
+    minWidth: "290px",
     heigth: "100px",
     flex: 1,
     display: 'flex',
@@ -44,6 +45,7 @@ const fileReady = {
 }
 
 export default function DropZone({ handleImageDrop }) {
+    const screenWidth = useMediaQuery('(max-width:375px)');
     const {
         getRootProps,
         getInputProps,
@@ -74,7 +76,7 @@ export default function DropZone({ handleImageDrop }) {
             <div {...getRootProps({ style })}>
                 <input name="image" {...getInputProps()} />
                 <Clip />
-                <p style={{ "margin-left": "15px" }}>Agregá un archivo o arrastralo y soltalo aquí</p>
+                <p style={{ "margin-left": "15px" }}>{screenWidth ? "Agregá un archivo" : "Agregá un archivo o arrastralo y soltalo aquí"}</p>
             </div>
         </div >
     );

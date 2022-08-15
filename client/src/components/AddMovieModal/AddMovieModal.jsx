@@ -22,8 +22,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 730,
-    minHeight: 440,
+    width: { xs: "100%", lg: 730 },
+    minHeight: { xs: "100vh", lg: 440 },
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -141,7 +141,7 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    {finished ? <SuccesfullUpload title={input.title} exitModal={setOpen} /> :
+                    {!finished ? <SuccesfullUpload title={input.title} exitModal={setOpen} /> :
                         <>
                             <Typography variant="h1" component="div" sx={{
                                 fontFamily: "BebasNeue-Regular",
@@ -160,7 +160,8 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                                 flexDirection: "column",
                                 justifyContent: "space-around",
                                 alignItems: "center",
-                                minHeight: 300
+                                minHeight: 300,
+                                minWidth: "350px"
                             }}>
                                 {!isLoading && !finished ? <DeopZone handleImageDrop={handleImageDrop} /> : ''}
                                 {isLoading || finished ? <LoadingBar progress={progress} error={uploadError} /> : ''}
