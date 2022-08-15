@@ -110,6 +110,7 @@ function AddMovieModal({ open, setOpen, handleClose }) {
 
     const handleSubmit = async function (e) {
         e.preventDefault();
+        if (uploadError) return;
         try {
             await uploadMovie(input, setIsLoading, setProgress, setFinished, setUploadError);
         } catch (err) {
@@ -122,6 +123,7 @@ function AddMovieModal({ open, setOpen, handleClose }) {
         setFinished(false);
         setProgress(0);
         setIsLoading(false);
+        setUploadError(false)
         setInput({
             title: '',
             image: ''
@@ -199,7 +201,7 @@ function AddMovieModal({ open, setOpen, handleClose }) {
                                     }
                                 }]}
                                 />
-                                <Button type="submit" onClick={handleSubmit} variant="contained" sx={buttonStyle} disabled={input.image && input.title ?
+                                <Button type="submit" onClick={handleSubmit} variant="contained" sx={buttonStyle} disabled={(input.image && input.title) ?
                                     false
                                     :
                                     true}

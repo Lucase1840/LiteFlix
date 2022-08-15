@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 
 function LinearProgressWithLabel(props) {
     if (props.value === "error") {
-        let value = 100
         return (
             <Box sx={{
                 display: 'flex',
@@ -35,8 +34,7 @@ function LinearProgressWithLabel(props) {
                     mr: 1, position: "relative",
                     height: "10px"
                 }}>
-                    <LinearProgress variant="determinate" {...value
-                    } sx={
+                    <LinearProgress variant="determinate" value={100} sx={
                         [{
                             height: "10px",
                         }, {
