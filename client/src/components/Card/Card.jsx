@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { useState } from 'react';
+
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+
 import { ReactComponent as PlayButton } from "../../images/playbutton.svg"
 import { ReactComponent as Star } from "../../images/star.svg"
 import { ReactComponent as PlayButtonLittle } from "../../images/playbuttonlittle.svg"
 import { ReactComponent as PlayButtonMobile } from "../../images/playbuttonmobile.svg"
-import useMediaQuery from '@mui/material/useMediaQuery';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Card({ title, votes, year, image }) {
     const [isHovering, setIsHovering] = useState(false);
-    const screenWidth = useMediaQuery('(max-width:375px)');
+    const isMobileScreen = useMediaQuery('(max-width:375px)');
     const handleMouseOver = () => {
         setIsHovering(true);
     };
@@ -23,41 +25,44 @@ export default function Card({ title, votes, year, image }) {
 
     const handleClick = () => {
         if (isHovering) return setIsHovering(false);
-        return setIsHovering(true)
+        return setIsHovering(true);
     };
-
 
     let imageUrl;
 
-    !image.includes("https:") ? imageUrl = `https://image.tmdb.org/t/p/w780${image}` : imageUrl = image
+    !image.includes("https:") ?
+        imageUrl = `https://image.tmdb.org/t/p/w780${image}`
+        :
+        imageUrl = image
 
     return (
         <>
             {isHovering ?
-                (<CardContent sx={[{
-                    backgroundImage: `url(${imageUrl})`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    p: 0,
-                    pb: "0px !important",
-                    maxWidth: { xs: 350, lg: 220 },
-                    minWidth: { xs: 350, lg: 220 },
-                    minHeight: { xs: 194, lg: 146 },
-                    maxHeight: { xs: 194, lg: 146 },
-                    color: "white",
-                    position: "relative",
-                    borderRadius: 1,
-                    mb: { xs: "30px", lg: "20px" },
-                    cursor: "pointer",
-                    "&:last-child": {
-                        mb: "0"
-                    }
-                }
-                ]}
-                    onMouseOver={screenWidth ? null : handleMouseOver}
-                    onMouseOut={screenWidth ? null : handleMouseOut}
-                    onClick={!screenWidth ? null : handleClick}>
+                (<CardContent
+                    onMouseOver={isMobileScreen ? null : handleMouseOver}
+                    onMouseOut={isMobileScreen ? null : handleMouseOut}
+                    onClick={!isMobileScreen ? null : handleClick}
+                    sx={[{
+                        backgroundImage: `url(${imageUrl})`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        p: 0,
+                        pb: "0px !important",
+                        maxWidth: { xs: 350, lg: 220 },
+                        minWidth: { xs: 350, lg: 220 },
+                        minHeight: { xs: 194, lg: 146 },
+                        maxHeight: { xs: 194, lg: 146 },
+                        color: "white",
+                        position: "relative",
+                        borderRadius: 1,
+                        mb: { xs: "30px", lg: "20px" },
+                        cursor: "pointer",
+                        "&:last-child": {
+                            mb: "0"
+                        }
+                    }]}
+                >
                     <Box sx={{
                         position: "absolute",
                         bottom: 0,
@@ -77,7 +82,12 @@ export default function Card({ title, votes, year, image }) {
                         ml: { xs: 2, lg: 1 },
                         mt: { xs: 4, lg: 0 }
                     }}>
-                        <Box sx={{ display: "flex", position: "relative", justifyContent: "flex-start", alignItems: "center", }}>
+                        <Box sx={{
+                            display: "flex",
+                            position: "relative",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                        }}>
                             <PlayButtonLittle />
                             <Typography variant="h1" component="div" sx={{
                                 maxWidth: { xs: 260, lg: "85%" },
@@ -97,7 +107,13 @@ export default function Card({ title, votes, year, image }) {
                             </Typography>
                         </Box>
 
-                        <Box sx={{ display: "flex", justifyContent: "space-around", position: "relative", mb: 2, mt: { xs: 3, lg: 2 } }}>
+                        <Box sx={{
+                            display: "flex",
+                            justifyContent: "space-around",
+                            position: "relative",
+                            mb: 2,
+                            mt: { xs: 3, lg: 2 }
+                        }}>
                             <Typography variant="body2" sx={{
                                 width: { xs: 180, lg: "60px" },
                                 mr: 12,
@@ -126,32 +142,31 @@ export default function Card({ title, votes, year, image }) {
                             </Typography>
                         </Box>
                     </Box>
-                </CardContent >) :
+                </CardContent >)
+                :
                 (
-                    <CardContent sx={[{
-                        backgroundImage: `url(${imageUrl})`,
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center",
-                        p: 0,
-                        pb: "0px !important",
-                        maxWidth: { xs: 350, lg: 220 },
-                        minWidth: { xs: 350, lg: 220 },
-                        maxHeight: { xs: 194, lg: 146 },
-                        minHeight: { xs: 194, lg: 146 },
-                        color: "white",
-                        position: "relative",
-                        borderRadius: 1,
-                        mb: { xs: "30px", lg: "20px" },
-                        "&:last-child": {
-                            mb: "0"
-                        }
-                    }, {
-                    }
-                    ]}
-                        onMouseOver={screenWidth ? null : handleMouseOver}
-                        onMouseOut={screenWidth ? null : handleMouseOut}
-                        onClick={!screenWidth ? null : handleClick}>
+                    <CardContent onMouseOver={isMobileScreen ? null : handleMouseOver}
+                        onMouseOut={isMobileScreen ? null : handleMouseOut}
+                        onClick={!isMobileScreen ? null : handleClick} sx={[{
+                            backgroundImage: `url(${imageUrl})`,
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center",
+                            p: 0,
+                            pb: "0px !important",
+                            maxWidth: { xs: 350, lg: 220 },
+                            minWidth: { xs: 350, lg: 220 },
+                            maxHeight: { xs: 194, lg: 146 },
+                            minHeight: { xs: 194, lg: 146 },
+                            color: "white",
+                            position: "relative",
+                            borderRadius: 1,
+                            mb: { xs: "30px", lg: "20px" },
+                            "&:last-child": {
+                                mb: "0"
+                            }
+                        }]}
+                    >
                         <Box sx={{
                             position: "absolute",
                             bottom: 0,
@@ -169,8 +184,12 @@ export default function Card({ title, votes, year, image }) {
                             justifyContent: { xs: "flex-end", lg: "flex-end" },
                             alignItems: { xs: "center" }
                         }}>
-                            <Box sx={{ position: "relative", maxHeight: 94 }}>
-                                {screenWidth ? <PlayButtonMobile /> : <PlayButton />}
+                            <Box sx={{
+                                position: "relative",
+                                maxHeight: 94
+                            }}>
+                                {isMobileScreen ? <PlayButtonMobile /> : <PlayButton />}
+
                                 <Typography variant="h1" component="div" sx={{
                                     px: 1,
                                     maxWidth: { xs: 260, lg: 220 },
@@ -194,4 +213,4 @@ export default function Card({ title, votes, year, image }) {
             }
         </>
     );
-}
+};

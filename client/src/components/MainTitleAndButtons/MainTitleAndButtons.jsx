@@ -1,16 +1,31 @@
+import React from 'react';
+
+import { ReactComponent as AddIcon } from "../../images/addicon.svg";
+import { ReactComponent as PlayIcon } from "../../images/playicon.svg";
+
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import React from 'react';
-import { ReactComponent as AddIcon } from "../../images/addicon.svg"
-import { ReactComponent as PlayIcon } from "../../images/playicon.svg"
-import useMediaQuery from '@mui/material/useMediaQuery';
+
 export default function MainTitleAndButtons({ movieTitle }) {
-    const screenWidth = useMediaQuery('(max-width:375px)');
+
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", maxWidth: { xs: "312px", lg: "100%" } }}>
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: { xs: "center", lg: "flex-start" }, maxWidth: { xs: "312px", lg: "100%" }, mt: { xs: 10 } }}>
-                <Box sx={{ display: "flex", mb: { lg: "24px" } }}>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: { xs: "312px", lg: "100%" }
+        }}>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: { xs: "center", lg: "flex-start" },
+                maxWidth: { xs: "312px", lg: "100%" },
+                mt: { xs: 10 }
+            }}>
+                <Box sx={{
+                    display: "flex",
+                    mb: { lg: "24px" }
+                }}>
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",
@@ -54,7 +69,12 @@ export default function MainTitleAndButtons({ movieTitle }) {
                 </Typography>
             </Box>
 
-            <Box sx={{ display: "flex", flexDirection: { xs: 'column', lg: 'row' }, alignItems: "center", mb: { xs: 5, lg: 14 } }}>
+            <Box sx={{
+                display: "flex",
+                flexDirection: { xs: 'column', lg: 'row' },
+                alignItems: "center",
+                mb: { xs: 5, lg: 14 }
+            }}>
                 <Button variant="contained" sx={[{
                     width: "248px",
                     height: "56px",
@@ -74,7 +94,9 @@ export default function MainTitleAndButtons({ movieTitle }) {
                         backgroundColor: "#343434",
                         boxShadow: 0
                     }
-                }]}><PlayIcon />{`\xa0reproducir`}</Button>
+                }]}>
+                    <PlayIcon />{`\xa0reproducir`}
+                </Button>
                 <Button variant="contained" sx={[{
                     width: "248px",
                     height: "56px",
@@ -92,7 +114,9 @@ export default function MainTitleAndButtons({ movieTitle }) {
                         backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.6)" },
                         boxShadow: 0
                     }
-                }]}> <AddIcon />{`\xa0mi lista`}</Button>
+                }]}>
+                    <AddIcon />{`\xa0mi lista`}
+                </Button>
             </Box>
         </Box >
     )

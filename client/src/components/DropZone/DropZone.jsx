@@ -76,8 +76,8 @@ export default function DropZone({ handleImageDrop }) {
             <div {...getRootProps({ style })}>
                 <input name="image" {...getInputProps()} />
                 <Clip />
-                <p style={{ "margin-left": "15px" }}>{screenWidth ? "Agregá un archivo" : "Agregá un archivo o arrastralo y soltalo aquí"}</p>
+                <p style={{ "marginLeft": "15px" }}>{screenWidth ? "Agregá un archivo" : "Agregá un archivo o arrastralo y soltalo aquí"}</p>
             </div>
         </div >
     );
-}
+};

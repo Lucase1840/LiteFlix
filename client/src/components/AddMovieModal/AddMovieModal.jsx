@@ -176,7 +176,7 @@ function AddMovieModal({ open, setOpen, handleClose }) {
                                     <LoadingBar progress={progress} error={uploadError} />
                                     :
                                     ''}
-                                <TextField name="title" id="filled-basic" onChange={handleInputChange} variant="standard" placeholder="título" disableAnimation={true} focused={false} sx={[{
+                                <TextField name="title" id="filled-basic" onChange={handleInputChange} variant="standard" placeholder="título" focused={false} sx={[{
                                     display: "flex",
                                     height: "56px",
                                     backgroundColor: "#242424",

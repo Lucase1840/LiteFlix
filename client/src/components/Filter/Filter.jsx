@@ -1,32 +1,40 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { moviesSelected } from '../../redux/actions';
+
+import { ReactComponent as Tick } from "../../images/tick.svg";
+import { ReactComponent as FilterArrow } from "../../images/filterarrow.svg";
+
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useDispatch } from 'react-redux';
-import React from 'react';
-import { ReactComponent as FilterArrow } from "../../images/filterarrow.svg"
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { ReactComponent as Tick } from "../../images/tick.svg"
-import { moviesSelected } from '../../redux/actions';
 
 export default function Filter() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [option, setOption] = React.useState("populares");
     const open = Boolean(anchorEl);
     const dispatch = useDispatch();
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = (e) => {
-        if (e.target.innerText === "") return setAnchorEl(null)
-        dispatch(moviesSelected(e.target.innerText))
+        if (e.target.innerText === "") return setAnchorEl(null);
+        dispatch(moviesSelected(e.target.innerText));
         setAnchorEl(null);
-        setOption(e.target.innerText)
+        setOption(e.target.innerText);
         setAnchorEl(null);
     };
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "flex-end", mr: { xs: 0, lg: 12 } }}>
+        <Box sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            mr: { xs: 0, lg: 12 }
+        }}>
             <Button
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}
@@ -34,7 +42,7 @@ export default function Filter() {
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                <Box sx={{ display: "flex", }}>
+                <Box sx={{ display: "flex" }}>
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",
@@ -46,7 +54,10 @@ export default function Filter() {
                     }}>
                         {`ver:\xa0`}
                     </Typography>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box sx={{
+                        display: "flex",
+                        alignItems: "center"
+                    }}>
                         <Typography variant="h1" component="div" sx={{
                             fontFamily: "BebasNeue-Regular",
                             fontStyle: "normal",
@@ -101,7 +112,7 @@ export default function Filter() {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem sx={{
+                <MenuItem onClick={handleClose} sx={{
                     fontFamily: "BebasNeue-Regular",
                     fontStyle: "normal",
                     fontWeight: 700,
@@ -109,11 +120,10 @@ export default function Filter() {
                     lineHeight: "16px",
                     letterSpacing: "4px",
                     color: "white",
-                }}
-                    onClick={handleClose}>
+                }}>
                     {option === "populares" ? <>{`populares\xa0`}<Tick /></> : "populares"}
                 </MenuItem>
-                <MenuItem sx={{
+                <MenuItem onClick={handleClose} sx={{
                     fontFamily: "BebasNeue-Regular",
                     fontStyle: "normal",
                     fontWeight: 700,
@@ -121,8 +131,7 @@ export default function Filter() {
                     lineHeight: "16px",
                     letterSpacing: "4px",
                     color: "white",
-                }}
-                    onClick={handleClose}>
+                }}>
                     {option === "mis peliculas" ? <>{`mis peliculas\xa0`}<Tick /></> : "mis peliculas"}
                 </MenuItem>
             </Menu>

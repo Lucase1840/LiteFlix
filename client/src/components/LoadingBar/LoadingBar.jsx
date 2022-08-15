@@ -1,14 +1,21 @@
 import * as React from 'react';
+
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
 
 function LinearProgressWithLabel(props) {
     if (props.value === "error") {
         let value = 100
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: "flex-start", minHeight: "100px", width: { xs: "340px", lg: "600px" }, ml: { xs: 1, lg: 0 } }}>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: "flex-start",
+                minHeight: "100px",
+                width: { xs: "340px", lg: "600px" },
+                ml: { xs: 1, lg: 0 }
+            }}>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary" sx={{
                         fontFamily: "BebasNeue-Regular",
@@ -29,17 +36,16 @@ function LinearProgressWithLabel(props) {
                     height: "10px"
                 }}>
                     <LinearProgress variant="determinate" {...value
-                    }
-                        sx={
-                            [{
-                                height: "10px",
-                            }, {
-                                ".MuiLinearProgress-bar1Determinate": {
-                                    backgroundColor: "red",
-                                }
-                            }]} />
+                    } sx={
+                        [{
+                            height: "10px",
+                        }, {
+                            ".MuiLinearProgress-bar1Determinate": {
+                                backgroundColor: "red",
+                            }
+                        }]} />
                 </Box>
-                <Typography sx={{
+                <Typography variant="body2" color="text.secondary" sx={{
                     fontFamily: "BebasNeue-Regular",
                     fontStyle: "normal",
                     fontWeight: 400,
@@ -49,12 +55,21 @@ function LinearProgressWithLabel(props) {
                     color: "white",
                     mt: 2,
                     alignSelf: "flex-end"
-                }} variant="body2" color="text.secondary">reintentar</Typography>
+                }}>
+                    reintentar
+                </Typography>
             </Box >
         );
     } else {
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: "flex-start", minHeight: "100px", width: { xs: "340px", lg: "600px" }, ml: { xs: 1, lg: 0 } }}>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: "flex-start",
+                minHeight: "100px",
+                width: { xs: "340px", lg: "600px" },
+                ml: { xs: 1, lg: 0 }
+            }}>
                 <Box sx={{ minWidth: 35 }}>
                     <Typography variant="body2" color="text.secondary" sx={{
                         fontFamily: "BebasNeue-Regular",
@@ -78,32 +93,33 @@ function LinearProgressWithLabel(props) {
                     height: "10px"
                 }}>
                     <LinearProgress variant="determinate" {...props
-                    }
-                        sx={
-                            [{
-                                height: "10px",
-                            }, {
-                                ".MuiLinearProgress-bar1Determinate": {
-                                    backgroundColor: "#64EEBC",
-                                }
-                            }]} />
+                    } sx={
+                        [{
+                            height: "10px",
+                        }, {
+                            ".MuiLinearProgress-bar1Determinate": {
+                                backgroundColor: "#64EEBC",
+                            }
+                        }]} />
                 </Box>
-                {props.value === 100 ? <Typography sx={{
-                    fontFamily: "BebasNeue-Regular",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    fontSize: "18px",
-                    lineHeight: "22px",
-                    letterSpacing: "4px",
-                    color: "#64EEBC",
-                    mt: 2,
-                    alignSelf: "flex-end"
-                }} variant="body2" color="text.secondary">¡listo!</Typography> : ''}
+                {props.value === 100 ?
+                    <Typography variant="body2" color="text.secondary" sx={{
+                        fontFamily: "BebasNeue-Regular",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        fontSize: "18px",
+                        lineHeight: "22px",
+                        letterSpacing: "4px",
+                        color: "#64EEBC",
+                        mt: 2,
+                        alignSelf: "flex-end"
+                    }} >
+                        ¡listo!
+                    </Typography> : ''}
             </Box >
         );
-    }
-
-}
+    };
+};
 
 export default function LoadingBar({ progress, error }) {
     if (!error) {

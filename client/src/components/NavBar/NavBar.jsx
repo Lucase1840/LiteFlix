@@ -1,19 +1,33 @@
-import Typography from '@mui/material/Typography';
-import { ReactComponent as AddIcon } from "../../images/addicon.svg"
-import { ReactComponent as MenuIcon } from "../../images/menuicon.svg"
-import { ReactComponent as NotificationIcon } from "../../images/notificationicon.svg"
-import { ReactComponent as ProfileIcon } from "../../images/profileicon.svg"
-import Box from '@mui/material/Box';
 import React from 'react';
+
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ReactComponent as AddMovieMobile } from "../../images/addmoviemobile.svg"
+
+import { ReactComponent as AddIcon } from "../../images/addicon.svg";
+import { ReactComponent as MenuIcon } from "../../images/menuicon.svg";
+import { ReactComponent as NotificationIcon } from "../../images/notificationicon.svg";
+import { ReactComponent as ProfileIcon } from "../../images/profileicon.svg";
+import { ReactComponent as AddMovieMobile } from "../../images/addmoviemobile.svg";
 
 export default function NavBar({ handleOpen, onModal }) {
-    const screenWidth = useMediaQuery('(max-width:375px)');
+
+    const isMobileScreen = useMediaQuery('(max-width:375px)');
 
     return (
-        <Box sx={{ display: "flex", minHeight: "50px", justifyContent: "space-between", }} >
-            <Box sx={{ display: "flex", alignItems: "center", flexDirection: { xs: 'row-reverse', lg: 'row' }, mt: { xs: 2, lg: 0 }, ml: { xs: 2, lg: 0 }, justifyContent: "center" }}>
+        <Box sx={{
+            display: "flex",
+            minHeight: "50px",
+            justifyContent: "space-between",
+        }} >
+            <Box sx={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: { xs: 'row-reverse', lg: 'row' },
+                mt: { xs: 2, lg: 0 },
+                ml: { xs: 2, lg: 0 },
+                justifyContent: "center"
+            }}>
                 <Box sx={{ display: "flex", }}>
                     <Typography variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
@@ -41,7 +55,9 @@ export default function NavBar({ handleOpen, onModal }) {
                     </Typography>
                 </Box>
 
-                {screenWidth ? <Box sx={{ minHeigth: "56px" }} onClick={handleOpen}>{!onModal ? <AddMovieMobile /> : ''}</Box> :
+                {isMobileScreen ?
+                    <Box sx={{ minHeigth: "56px" }} onClick={handleOpen}>{!onModal ? <AddMovieMobile /> : ''}</Box>
+                    :
                     <Typography onClick={handleOpen} variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",
@@ -57,9 +73,16 @@ export default function NavBar({ handleOpen, onModal }) {
                     </Typography>}
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", minWidth: { xs: "30px", lg: "175px" }, justifyContent: "space-around", mr: { xs: 2, lg: 0 }, mt: { xs: 2, lg: 0 } }}>
-                {screenWidth ? '' : <MenuIcon></MenuIcon>}
-                {screenWidth ? '' : <NotificationIcon></NotificationIcon>}
+            <Box sx={{
+                display: "flex",
+                alignItems: "center",
+                minWidth: { xs: "30px", lg: "175px" },
+                justifyContent: "space-around",
+                mr: { xs: 2, lg: 0 },
+                mt: { xs: 2, lg: 0 }
+            }}>
+                {isMobileScreen ? '' : <MenuIcon></MenuIcon>}
+                {isMobileScreen ? '' : <NotificationIcon></NotificationIcon>}
                 <ProfileIcon></ProfileIcon>
             </Box>
         </Box >
