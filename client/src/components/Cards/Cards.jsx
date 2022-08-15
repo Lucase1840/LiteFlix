@@ -10,9 +10,6 @@ function Home() {
         // dispatch(getMovies())
     }, [moviesSelected]);
 
-    console.log(moviesSelected)
-
-    console.log(moviesSelected)
     return (
         <Box sx={{ display: "flex", flexDirection: "column", p: 0, alignContent: "flex-start", minHeight: "640px", maxHeight: "640px", mt: 2 }}>
             {moviesSelected?.length ? moviesSelected.map((movie, i) => {

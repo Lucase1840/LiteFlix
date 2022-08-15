@@ -7,9 +7,13 @@ import Cards from '../Cards/Cards.jsx'
 import MainTitleAndButtons from '../MainTitleAndButtons/MainTitleAndButtons.jsx'
 import NavBar from '../NavBar/NavBar.jsx'
 import Filter from '../Filter/Filter.jsx'
+import AddMovieModal from '../AddMovieModal/AddMovieModal.jsx'
 function Home() {
   const dispatch = useDispatch();
   const highlightedMovie = useSelector(state => state.highlightedMovie[0])
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getMovies())
@@ -20,6 +24,7 @@ function Home() {
 
   return (
     <Box sx={{ maxWidth: "100vw", mx: "-8px", my: "-8px", boxSizing: "border-box", }}>
+      <AddMovieModal open={open} setOpen={setOpen} handleOpen={handleOpen} handleClose={handleClose} />
       <Box sx={{
         minHeight: "100vh",
         backgroundColor: "red",
@@ -30,7 +35,7 @@ function Home() {
       }}>
         <Box sx={{ px: 10 }}>
           <Box sx={{ mb: 2 }}>
-            < NavBar />
+            < NavBar handleOpen={handleOpen} />
           </Box>
           <Filter />
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", maxHeight: "665px", minHeight: "645px", }}>
