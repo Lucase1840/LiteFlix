@@ -1,20 +1,20 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { uploadMovie, validate } from './MovieUploadUtils'
+import React, { useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import LoadingBar from '../LoadingBar/LoadingBar';
-import { useEffect } from 'react';
-import DeopZone from '../DropZone/DropZone.jsx';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import NavBar from '../NavBar/NavBar.jsx'
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { uploadUserMovie } from '../../redux/actions';
+import LoadingBar from '../LoadingBar/LoadingBar';
+import NavBar from '../NavBar/NavBar.jsx';
 import SuccesfullUpload from '../SuccesfullUpload/SuccesfullUpload.jsx';
+import DropZone from '../DropZone/DropZone.jsx';
+
+import { uploadMovie } from './MovieUploadUtils';
+
 const style = {
     display: "flex",
     flexDirection: "column",
@@ -36,48 +36,41 @@ const style = {
     boxSizing: "border-box",
 };
 
-function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
+function AddMovieModal({ open, setOpen, handleClose }) {
     const [isLoading, setIsLoading] = useState(false);
     const [finished, setFinished] = useState(false);
     const [progress, setProgress] = useState(0);
-    const dispatch = useDispatch()
-    const error = useSelector(state => state.error)
-    const screenWidth = useMediaQuery('(max-width:375px)');
+    const [uploadError, setUploadError] = React.useState(false);
     const [input, setInput] = React.useState({
         title: '',
         image: ''
     });
 
+    const isMobileScreen = useMediaQuery('(max-width:375px)');
 
-
-    const [uploadError, setUploadError] = React.useState(false);
-
-    const [errors, setErrors] = React.useState({
-        title: '',
-        image: ''
-    });
     let buttonStyle
 
-    input.image && input.title ? buttonStyle = [{
-        width: "248px",
-        height: "56px",
-        fontFamily: "BebasNeue-Regular",
-        fontStyle: "normal",
-        fontWeight: 400,
-        fontSize: "18px",
-        lineHeight: "22px",
-        letterSpacing: "4px",
-        backgroundColor: "#FFFFFF",
-        borderRadius: "0px",
-        boxShadow: 0,
-        color: "black"
-    }, {
-        ":hover": {
+    input.image && input.title ?
+        buttonStyle = [{
+            width: "248px",
+            height: "56px",
+            fontFamily: "BebasNeue-Regular",
+            fontStyle: "normal",
+            fontWeight: 400,
+            fontSize: "18px",
+            lineHeight: "22px",
+            letterSpacing: "4px",
             backgroundColor: "#FFFFFF",
+            borderRadius: "0px",
             boxShadow: 0,
             color: "black"
-        }
-    }]
+        }, {
+            ":hover": {
+                backgroundColor: "#FFFFFF",
+                boxShadow: 0,
+                color: "black"
+            }
+        }]
         : buttonStyle =
 
         [{
@@ -106,10 +99,6 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
             ...input,
             [e.target.name]: e.target.value
         });
-        setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.value
-        }));
     };
 
     const handleImageDrop = function (image) {
@@ -117,46 +106,33 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
             ...input,
             image: image
         });
-        setErrors(validate({
-            ...input,
-            image: image
-        }));
     };
-
-    console.log(input)
-    console.log(error)
 
     const handleSubmit = async function (e) {
         e.preventDefault();
         try {
-            await uploadMovie(input, setIsLoading, setProgress, setFinished, setUploadError)
-            // e.target.reset();
+            await uploadMovie(input, setIsLoading, setProgress, setFinished, setUploadError);
         } catch (err) {
             console.log(err.message);
-        }
-    }
+        };
+    };
 
     const handleClosingModal = () => {
-        handleClose()
-        setFinished(false)
-        setProgress(0)
-        setIsLoading(false)
+        handleClose();
+        setFinished(false);
+        setProgress(0);
+        setIsLoading(false);
         setInput({
             title: '',
             image: ''
-        })
-    }
+        });
+    };
 
     return (
         <div>
-            <Modal
-                open={open}
-                onClose={handleClosingModal}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
+            <Modal open={open} onClose={handleClosingModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <Box sx={style}>
-                    {screenWidth ?
+                    {isMobileScreen ?
                         <Box sx={{
                             display: "flex",
                             alignItems: "flex-start",
@@ -164,8 +140,11 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                             top: 0
                         }}>
                             <NavBar onModal={true} /></Box>
-                        : ''}
-                    {finished ? <SuccesfullUpload title={input.title} exitModal={setOpen} uploadFinished={setFinished} /> :
+                        :
+                        ''}
+                    {finished ?
+                        <SuccesfullUpload title={input.title} exitModal={setOpen} uploadFinished={setFinished} />
+                        :
                         <>
                             <Typography variant="h1" component="div" sx={{
                                 fontFamily: "BebasNeue-Regular",
@@ -189,9 +168,15 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                                 minHeight: { xs: 250, lg: 300 },
                                 minWidth: "350px"
                             }}>
-                                {!isLoading && !finished ? <DeopZone handleImageDrop={handleImageDrop} /> : ''}
-                                {isLoading || finished ? <LoadingBar progress={progress} error={uploadError} /> : ''}
-                                <TextField sx={[{
+                                {!isLoading && !finished ?
+                                    <DropZone handleImageDrop={handleImageDrop} />
+                                    :
+                                    ''}
+                                {isLoading || finished ?
+                                    <LoadingBar progress={progress} error={uploadError} />
+                                    :
+                                    ''}
+                                <TextField name="title" id="filled-basic" onChange={handleInputChange} variant="standard" placeholder="título" disableAnimation={true} focused={false} sx={[{
                                     display: "flex",
                                     height: "56px",
                                     backgroundColor: "#242424",
@@ -213,29 +198,37 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                                         backgroundColor: "#242424",
                                     }
                                 }]}
-                                    name="title" id="filled-basic" onChange={handleInputChange} variant="standard" placeholder="título" disableAnimation={true} focused={false} />
-                                <Button type="submit" onClick={handleSubmit} variant="contained"
-                                    sx={buttonStyle} disabled={input.image && input.title ? false : true}>subir pelicula</Button>
+                                />
+                                <Button type="submit" onClick={handleSubmit} variant="contained" sx={buttonStyle} disabled={input.image && input.title ?
+                                    false
+                                    :
+                                    true}
+                                >subir pelicula
+                                </Button>
                             </FormControl>
-                            {screenWidth ? <Button variant="contained" onClick={handleClosingModal} sx={[{
-                                width: "248px",
-                                height: "56px",
-                                fontFamily: "BebasNeue-Regular",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                fontSize: "18px",
-                                lineHeight: "22px",
-                                letterSpacing: "4px",
-                                backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.5)" },
-                                borderRadius: "0px",
-                                boxShadow: 0,
-                                border: "1px solid white"
-                            }, {
-                                "&:hover": {
-                                    backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.6)" },
-                                    boxShadow: 0
-                                }
-                            }]}>salir</Button> : ''}
+                            {isMobileScreen ?
+                                <Button variant="contained" onClick={handleClosingModal} sx={[{
+                                    width: "248px",
+                                    height: "56px",
+                                    fontFamily: "BebasNeue-Regular",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    fontSize: "18px",
+                                    lineHeight: "22px",
+                                    letterSpacing: "4px",
+                                    backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.5)" },
+                                    borderRadius: "0px",
+                                    boxShadow: 0,
+                                    border: "1px solid white"
+                                }, {
+                                    "&:hover": {
+                                        backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.6)" },
+                                        boxShadow: 0
+                                    }
+                                }]}>salir
+                                </Button>
+                                :
+                                ''}
                         </>
                     }
                 </Box>
