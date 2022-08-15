@@ -13,7 +13,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 function Home() {
   const dispatch = useDispatch();
   const highlightedMovie = useSelector(state => state.highlightedMovie[0])
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

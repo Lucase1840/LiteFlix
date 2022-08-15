@@ -10,6 +10,8 @@ import { useEffect } from 'react';
 import DeopZone from '../DropZone/DropZone.jsx';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
+import NavBar from '../NavBar/NavBar.jsx'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { uploadUserMovie } from '../../redux/actions';
 import SuccesfullUpload from '../SuccesfullUpload/SuccesfullUpload.jsx';
@@ -31,7 +33,7 @@ const style = {
     textAlign: "center",
     backgroundColor: "#242424",
     color: "white",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
 };
 
 function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
@@ -40,11 +42,13 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
     const [progress, setProgress] = useState(0);
     const dispatch = useDispatch()
     const error = useSelector(state => state.error)
-
+    const screenWidth = useMediaQuery('(max-width:375px)');
     const [input, setInput] = React.useState({
         title: '',
         image: ''
     });
+
+
 
     const [uploadError, setUploadError] = React.useState(false);
 
@@ -132,16 +136,36 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
         }
     }
 
+    const handleClosingModal = () => {
+        handleClose()
+        setFinished(false)
+        setProgress(0)
+        setIsLoading(false)
+        setInput({
+            title: '',
+            image: ''
+        })
+    }
+
     return (
         <div>
             <Modal
                 open={open}
-                onClose={handleClose}
+                onClose={handleClosingModal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    {!finished ? <SuccesfullUpload title={input.title} exitModal={setOpen} /> :
+                    {screenWidth ?
+                        <Box sx={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            position: "fixed",
+                            top: 0
+                        }}>
+                            <NavBar onModal={true} /></Box>
+                        : ''}
+                    {finished ? <SuccesfullUpload title={input.title} exitModal={setOpen} uploadFinished={setFinished} /> :
                         <>
                             <Typography variant="h1" component="div" sx={{
                                 fontFamily: "BebasNeue-Regular",
@@ -151,7 +175,8 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                                 lineHeight: "20px",
                                 letterSpacing: "4px",
                                 color: "#64EEBC",
-                                mb: 4
+                                mb: { xs: 2, lg: 4 },
+                                mt: 4
                             }}>
                                 agregar película
                             </Typography>
@@ -160,7 +185,8 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                                 flexDirection: "column",
                                 justifyContent: "space-around",
                                 alignItems: "center",
-                                minHeight: 300,
+                                height: { xs: 300, lg: 300 },
+                                minHeight: { xs: 250, lg: 300 },
                                 minWidth: "350px"
                             }}>
                                 {!isLoading && !finished ? <DeopZone handleImageDrop={handleImageDrop} /> : ''}
@@ -191,6 +217,25 @@ function AddMovieModal({ open, setOpen, handleOpen, handleClose }) {
                                 <Button type="submit" onClick={handleSubmit} variant="contained"
                                     sx={buttonStyle} disabled={input.image && input.title ? false : true}>subir pelicula</Button>
                             </FormControl>
+                            {screenWidth ? <Button variant="contained" onClick={handleClosingModal} sx={[{
+                                width: "248px",
+                                height: "56px",
+                                fontFamily: "BebasNeue-Regular",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                fontSize: "18px",
+                                lineHeight: "22px",
+                                letterSpacing: "4px",
+                                backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.5)" },
+                                borderRadius: "0px",
+                                boxShadow: 0,
+                                border: "1px solid white"
+                            }, {
+                                "&:hover": {
+                                    backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.6)" },
+                                    boxShadow: 0
+                                }
+                            }]}>salir</Button> : ''}
                         </>
                     }
                 </Box>

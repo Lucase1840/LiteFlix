@@ -8,7 +8,7 @@ import React from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { ReactComponent as AddMovieMobile } from "../../images/addmoviemobile.svg"
 
-export default function NavBar({ handleOpen }) {
+export default function NavBar({ handleOpen, onModal }) {
     const screenWidth = useMediaQuery('(max-width:375px)');
 
     return (
@@ -41,7 +41,7 @@ export default function NavBar({ handleOpen }) {
                     </Typography>
                 </Box>
 
-                {screenWidth ? <Box sx={{ minHeigth: "56px" }} onClick={handleOpen}><AddMovieMobile /></Box> :
+                {screenWidth ? <Box sx={{ minHeigth: "56px" }} onClick={handleOpen}>{!onModal ? <AddMovieMobile /> : ''}</Box> :
                     <Typography onClick={handleOpen} variant="h1" component="div" sx={{
                         fontFamily: "BebasNeue-Regular",
                         fontStyle: "normal",

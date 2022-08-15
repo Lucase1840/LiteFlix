@@ -4,14 +4,15 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-function SuccesfullUpload({ title, exitModal }) {
+function SuccesfullUpload({ title, exitModal, uploadFinished }) {
     const screenWidth = useMediaQuery('(max-width:375px)');
     const handleClick = () => {
+        uploadFinished(false)
         exitModal(false)
     }
     return (
         <>
-            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: 700, justifyContent: "center" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: 700, justifyContent: "center", mb: { xs: 20, lg: 0 } }}>
                 {screenWidth ? ''
                     :
                     <Box sx={{ display: "flex", alignItems: "center", }}>
@@ -37,7 +38,8 @@ function SuccesfullUpload({ title, exitModal }) {
                         }}>
                             flix
                         </Typography>
-                    </Box>}
+                    </Box>
+                }
                 <Box sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -46,7 +48,7 @@ function SuccesfullUpload({ title, exitModal }) {
                     minHeight: { xs: 300, lg: 180 },
                     mt: 12
                 }}>
-                    <Box>
+                    <Box sx={{ maxWidth: { xs: "300px", lg: "500px" } }}>
                         <Typography variant="h1" component="div" sx={{
                             fontFamily: "BebasNeue-Regular",
                             fontStyle: "normal",
@@ -67,7 +69,7 @@ function SuccesfullUpload({ title, exitModal }) {
                             lineHeight: "24px",
                             letterSpacing: "4px",
                             color: "white",
-                            mb: 11
+                            mb: 11,
                         }}>
                             {`${title} fue correctamente subida.`}
                         </Typography>

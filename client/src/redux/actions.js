@@ -35,7 +35,7 @@ export const moviesSelected = (selectedOption) => {
 
 export const uploadUserMovie = (movies) => {
   return function (dispatch) {
-    let userMovies = movies.slice(movies.length - 4, movies.length)
+    let userMovies = movies.slice(movies.length - 4, movies.length).reverse()
     console.log(userMovies)
     dispatch({ type: UPLOAD_MOVIE, payload: userMovies })
   }
