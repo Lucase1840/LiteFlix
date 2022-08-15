@@ -26,7 +26,7 @@ export default function Filter() {
     };
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mr: { xs: 0, lg: 12 } }}>
             <Button
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}
@@ -75,7 +75,7 @@ export default function Filter() {
                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         mt: 1,
                         backgroundColor: "#242424",
-                        width: "185px",
+                        width: { xs: "375px", lg: "241px" },
                         '& .MuiAvatar-root': {
                             width: 32,
                             height: 32,

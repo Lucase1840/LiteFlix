@@ -6,10 +6,13 @@ import Typography from '@mui/material/Typography';
 import { ReactComponent as PlayButton } from "../../images/playbutton.svg"
 import { ReactComponent as Star } from "../../images/star.svg"
 import { ReactComponent as PlayButtonLittle } from "../../images/playbuttonlittle.svg"
+import { ReactComponent as PlayButtonMobile } from "../../images/playbuttonmobile.svg"
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 export default function Card({ title, votes, year, image }) {
     const [isHovering, setIsHovering] = useState(false);
-
+    const screenWidth = useMediaQuery('(max-width:375px)');
     const handleMouseOver = () => {
         setIsHovering(true);
     };
@@ -17,6 +20,12 @@ export default function Card({ title, votes, year, image }) {
     const handleMouseOut = () => {
         setIsHovering(false);
     };
+
+    const handleClick = () => {
+        if (isHovering) return setIsHovering(false);
+        return setIsHovering(true)
+    };
+
 
     let imageUrl;
 
@@ -32,44 +41,46 @@ export default function Card({ title, votes, year, image }) {
                     backgroundPosition: "center",
                     p: 0,
                     pb: "0px !important",
-                    maxWidth: 220,
-                    minWidth: 220,
-                    minHeight: 146,
-                    maxHeight: 146,
+                    maxWidth: { xs: 350, lg: 220 },
+                    minWidth: { xs: 350, lg: 220 },
+                    minHeight: { xs: 194, lg: 146 },
+                    maxHeight: { xs: 194, lg: 146 },
                     color: "white",
                     position: "relative",
                     borderRadius: 1,
-                    mb: "20px",
+                    mb: { xs: "30px", lg: "20px" },
                     cursor: "pointer",
                     "&:last-child": {
                         mb: "0"
                     }
                 }
                 ]}
-                    onMouseOver={handleMouseOver}
-                    onMouseOut={handleMouseOut}>
+                    onMouseOver={screenWidth ? null : handleMouseOver}
+                    onMouseOut={screenWidth ? null : handleMouseOut}
+                    onClick={!screenWidth ? null : handleClick}>
                     <Box sx={{
                         position: "absolute",
                         bottom: 0,
-                        width: 220,
-                        height: 146,
+                        width: { xs: 350, lg: 220 },
+                        height: { xs: 194, lg: 146 },
                         background: "rgba(36, 36, 36, 0.7)",
                         borderRadius: 1
                     }}>
                     </Box>
                     <Box sx={{
-                        maxWidth: 220,
+                        maxWidth: { xs: 320, lg: 220 },
                         minHeight: 146,
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "flex-end",
-                        alignItems: "flex-start",
-                        ml: 1
+                        alignItems: "flex- start",
+                        ml: { xs: 2, lg: 1 },
+                        mt: { xs: 4, lg: 0 }
                     }}>
-                        <Box sx={{ display: "flex", position: "relative", justifyContent: "center", alignItems: "flex-start", }}>
+                        <Box sx={{ display: "flex", position: "relative", justifyContent: "flex-start", alignItems: "center", }}>
                             <PlayButtonLittle />
                             <Typography variant="h1" component="div" sx={{
-                                maxWidth: "85%",
+                                maxWidth: { xs: 260, lg: "85%" },
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
                                 fontFamily: "BebasNeue-Regular",
@@ -86,11 +97,11 @@ export default function Card({ title, votes, year, image }) {
                             </Typography>
                         </Box>
 
-                        <Box sx={{ display: "flex", justifyContent: "space-around", position: "relative", mb: 2, mt: 2 }}>
+                        <Box sx={{ display: "flex", justifyContent: "space-around", position: "relative", mb: 2, mt: { xs: 3, lg: 2 } }}>
                             <Typography variant="body2" sx={{
-                                width: "60px",
+                                width: { xs: 180, lg: "60px" },
                                 mr: 12,
-                                ml: 0.5,
+                                ml: 0,
                                 fontFamily: "BebasNeue-Regular",
                                 fontStyle: "normal",
                                 fontWeight: 400,
@@ -108,7 +119,8 @@ export default function Card({ title, votes, year, image }) {
                                 fontWeight: 400,
                                 fontSize: "14px",
                                 lineHeight: "14px",
-                                letterSpacing: "4px"
+                                letterSpacing: "4px",
+                                mr: { xs: 0, lg: 1 }
                             }}>
                                 {year.slice(0, 4)}
                             </Typography>
@@ -123,52 +135,54 @@ export default function Card({ title, votes, year, image }) {
                         backgroundPosition: "center",
                         p: 0,
                         pb: "0px !important",
-                        maxWidth: 220,
-                        minWidth: 220,
-                        maxHeight: 146,
-                        minHeight: 146,
+                        maxWidth: { xs: 350, lg: 220 },
+                        minWidth: { xs: 350, lg: 220 },
+                        maxHeight: { xs: 194, lg: 146 },
+                        minHeight: { xs: 194, lg: 146 },
                         color: "white",
                         position: "relative",
                         borderRadius: 1,
-                        mb: "20px",
+                        mb: { xs: "30px", lg: "20px" },
                         "&:last-child": {
                             mb: "0"
                         }
                     }, {
                     }
                     ]}
-                        onMouseOver={handleMouseOver}
-                        onMouseOut={handleMouseOut}>
+                        onMouseOver={screenWidth ? null : handleMouseOver}
+                        onMouseOut={screenWidth ? null : handleMouseOut}
+                        onClick={!screenWidth ? null : handleClick}>
                         <Box sx={{
                             position: "absolute",
                             bottom: 0,
-                            width: 220,
-                            height: 146,
+                            width: { xs: 350, lg: 220 },
+                            height: { xs: 194, lg: 146 },
                             background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 22.78%, #000000 122.69%)",
                             borderRadius: 1
                         }}>
                         </Box>
                         <Box sx={{
-                            maxWidth: 220,
+                            maxWidth: { xs: "100%", lg: 220 },
                             minHeight: 146,
                             display: "flex",
                             flexDirection: "column",
-                            justifyContent: "flex-end"
+                            justifyContent: { xs: "flex-end", lg: "flex-end" },
+                            alignItems: { xs: "center" }
                         }}>
                             <Box sx={{ position: "relative", maxHeight: 94 }}>
-                                <PlayButton />
+                                {screenWidth ? <PlayButtonMobile /> : <PlayButton />}
                                 <Typography variant="h1" component="div" sx={{
                                     px: 1,
-                                    maxWidth: 220,
+                                    maxWidth: { xs: 260, lg: 220 },
                                     overflow: "hidden",
                                     textOverflow: "ellipsis",
                                     fontFamily: "BebasNeue-Regular",
                                     fontStyle: "normal",
                                     fontWeight: 400,
-                                    fontSize: "18px",
-                                    lineHeight: "18px",
+                                    fontSize: { xs: "16px", lg: "18px" },
+                                    lineHeight: { xs: "16px", lg: "18px" },
                                     letterSpacing: "4px",
-                                    mt: 1,
+                                    mt: { xs: 4, lg: 1 },
                                     mb: 2,
                                 }}>
                                     {title}

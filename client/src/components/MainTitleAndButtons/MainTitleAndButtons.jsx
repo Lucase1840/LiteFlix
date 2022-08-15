@@ -4,10 +4,11 @@ import Box from '@mui/material/Box';
 import React from 'react';
 import { ReactComponent as AddIcon } from "../../images/addicon.svg"
 import { ReactComponent as PlayIcon } from "../../images/playicon.svg"
+import useMediaQuery from '@mui/material/useMediaQuery';
 export default function MainTitleAndButtons({ movieTitle }) {
-
+    const screenWidth = useMediaQuery('(max-width:375px)');
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", maxWidth: { xs: "312px", lg: "100%" }, }} >
+        <Box sx={{ display: "flex", flexDirection: "column", maxWidth: { xs: "312px", lg: "100%" } }}>
             <Box sx={{ display: "flex", flexDirection: "column", alignItems: { xs: "center", lg: "flex-start" }, maxWidth: { xs: "312px", lg: "100%" }, mt: { xs: 10 } }}>
                 <Box sx={{ display: "flex", mb: { lg: "24px" } }}>
                     <Typography variant="h1" component="div" sx={{
@@ -45,7 +46,7 @@ export default function MainTitleAndButtons({ movieTitle }) {
                     letterSpacing: { xs: "10px", lg: "16px" },
                     color: "#64EEBC",
                     textAlign: { xs: "center", lg: "left" },
-                    mb: "32px",
+                    mb: { xs: '15px', lg: "32px" },
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                 }}>
@@ -53,7 +54,7 @@ export default function MainTitleAndButtons({ movieTitle }) {
                 </Typography>
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", mb: 14 }}>
+            <Box sx={{ display: "flex", flexDirection: { xs: 'column', lg: 'row' }, alignItems: "center", mb: { xs: 5, lg: 14 } }}>
                 <Button variant="contained" sx={[{
                     width: "248px",
                     height: "56px",
@@ -66,7 +67,8 @@ export default function MainTitleAndButtons({ movieTitle }) {
                     backgroundColor: "#242424",
                     borderRadius: "0px",
                     boxShadow: 0,
-                    mr: "24px"
+                    mr: { xs: 0, lg: "24px" },
+                    mb: { xs: 1, lg: 0 }
                 }, {
                     "&:hover": {
                         backgroundColor: "#343434",
@@ -82,12 +84,12 @@ export default function MainTitleAndButtons({ movieTitle }) {
                     fontSize: "18px",
                     lineHeight: "22px",
                     letterSpacing: "4px",
-                    backgroundColor: "rgba(36, 36, 36, 0.5)",
+                    backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.5)" },
                     borderRadius: "0px",
                     boxShadow: 0
                 }, {
                     "&:hover": {
-                        backgroundColor: "rgba(36, 36, 36, 0.6)",
+                        backgroundColor: { xs: "#242424", lg: "rgba(36, 36, 36, 0.6)" },
                         boxShadow: 0
                     }
                 }]}> <AddIcon />{`\xa0mi lista`}</Button>

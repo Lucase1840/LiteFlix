@@ -11,7 +11,7 @@ function Home() {
     }, [moviesSelected]);
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", p: 0, alignContent: "flex-start", minHeight: "640px", maxHeight: "640px", mt: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", p: 0, alignContent: "flex-start", minHeight: "640px", maxHeight: { xs: "auto", lg: "640px" }, mt: 2, mb: { xs: 6, lg: 0 } }}>
             {moviesSelected?.length ? moviesSelected.map((movie, i) => {
                 return (
                     movie.id.length > 16 ?

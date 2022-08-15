@@ -9,6 +9,7 @@ import NavBar from '../NavBar/NavBar.jsx'
 import Filter from '../Filter/Filter.jsx'
 import AddMovieModal from '../AddMovieModal/AddMovieModal.jsx'
 import useMediaQuery from '@mui/material/useMediaQuery';
+
 function Home() {
   const dispatch = useDispatch();
   const highlightedMovie = useSelector(state => state.highlightedMovie[0])
@@ -27,9 +28,16 @@ function Home() {
 
   screenWidth ? image = `url(https://image.tmdb.org/t/p/original${highlightedMovie?.poster_path})` : image = `url(https://image.tmdb.org/t/p/original${highlightedMovie?.backdrop_path})`
   return (
-    <Box sx={{ maxWidth: "100vw", mx: "-8px", my: "-8px", boxSizing: "border-box", }}>
-      {/* <AddMovieModal open={open} setOpen={setOpen} handleOpen={handleOpen} handleClose={handleClose} /> */}
+    <Box sx={{
+      maxWidth: "100vw",
+      mx: "-8px",
+      my: "-8px",
+      height: "100vh",
+      backgroundSize: "cover",
+    }}>
+      <AddMovieModal open={open} setOpen={setOpen} handleOpen={handleOpen} handleClose={handleClose} />
       <Box sx={{
+        height: { xs: "100vh" },
         width: { xs: "100vw", lg: "100vw" },
         minHeight: "100vh",
         backgroundPosition: "center",
@@ -37,18 +45,35 @@ function Home() {
         backgroundRepeat: "no-repeat",
         backgroundSize: { xs: "cover", lg: "cover" },
       }}>
-        <Box sx={{ px: { xs: 2, lg: 10 }, maxHeight: { xs: "100vh", lg: "665px" }, minHeight: { xs: "300px", lg: "645px" }, }}>
+        <Box sx={{
+          maxHeight: { xs: "100vh", lg: "665px" },
+          maxWidth: "100vw",
+          minHeight: "100%",
+          pr: { xs: "0px !important", lg: "16px !important" },
+          pl: { xs: "0px !important", lg: "16px !important" }
+        }}>
           <Box sx={{ mb: { xs: 2, lg: 2 } }}>
             < NavBar handleOpen={handleOpen} />
           </Box>
-          <Filter />
-          <Box sx={{ display: "flex", flexDirection: { xs: 'column', lg: 'row' }, justifyContent: { xs: 'center', lg: "space-between" }, alignItems: { xs: 'center', lg: "flex-end" }, mt: { xs: 8, lg: 0 } }}>
+          {!screenWidth ? <Filter /> : ''}
+          <Box sx={{
+            display: "flex",
+            flexDirection: { xs: 'column', lg: 'row' },
+            justifyContent: { xs: 'center', lg: "space-between" },
+            alignItems: { xs: 'center', lg: "flex-end" },
+            mt: { xs: 8, lg: 0 },
+            px: { xs: 2, lg: 10 },
+            background: { xs: 'linear-gradient(0deg, rgba(36,36,36,1) 65%, rgba(255,255,255,0) 80%)', lg: 'transparent' },
+            // height: "auto"
+          }}>
             <MainTitleAndButtons movieTitle={highlightedMovie?.title} />
+            {screenWidth ? <Filter /> : ''}
             <Cards />
           </Box>
         </Box>
-      </Box>
+      </Box >
     </Box >
+
   );
 };
 
