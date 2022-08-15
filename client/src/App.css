@@ -1,9 +1,14 @@
-.App {
-  text-align: center;
-  /* max-height: 900px !important;
+ @font-face {
+   font-family: 'BebasNeue-Regular';
+   src: url('font/BebasNeue-Regular.ttf') format("truetype");
+ }
+
+ .App {
+   text-align: center;
+   /* max-height: 900px !important;
   min-height: 900px !important; */
-  min-height: 89vh;
-  /* max-height: 100vh; */
-  position: relative;
-  box-sizing: border-box;
-}
+   min-height: 89vh;
+   /* max-height: 100vh; */
+   position: relative;
+   box-sizing: border-box;
+ }
