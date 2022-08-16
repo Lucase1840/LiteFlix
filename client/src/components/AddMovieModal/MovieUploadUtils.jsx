@@ -9,7 +9,7 @@ let URL;
 process.env.NODE_ENV === "development" ?
     URL = "http://localhost:3001"
     :
-    URL = ""
+    URL = "https://liteflix-lucas-espina.herokuapp.com"
 
 export const uploadMovie = async (input, setIsLoading, setProgress, setFinished, setUploadError) => {
     setIsLoading(true);
@@ -42,7 +42,6 @@ export const uploadMovie = async (input, setIsLoading, setProgress, setFinished,
                     setFinished(true);
                     setIsLoading(false);
                 })
-
         })
             .catch(error => {
                 setUploadError(true);

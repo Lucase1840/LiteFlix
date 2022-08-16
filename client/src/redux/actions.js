@@ -9,7 +9,7 @@ let URL;
 process.env.NODE_ENV === "development" ?
   URL = "http://localhost:3001"
   :
-  URL = "";
+  URL = "https://liteflix-lucas-espina.herokuapp.com";
 
 export const getMovies = () => {
   return function (dispatch) {
@@ -39,7 +39,6 @@ export const moviesSelected = (selectedOption) => {
 export const uploadUserMovie = (movies) => {
   return function (dispatch) {
     let userMovies = movies.slice(movies.length - 4, movies.length).reverse()
-    console.log(userMovies)
     dispatch({ type: UPLOAD_MOVIE, payload: userMovies })
   }
 };
